@@ -179,12 +179,14 @@ class GameEngine {
     const mother = firstFrog.gender === Genders.FEMALE ? firstFrog : secondFrog;
     const newFrogPlace = this.getFirstPlace(mother.x, mother.y);
 
-    this.lake.setField(new Frog(
-      newFrogPlace.x,
-      newFrogPlace.y,
-      Object.values(Genders)[Math.floor(Math.random() * 2)],
-      [firstFrog.characteristics[Math.floor(Math.random() * 2)], secondFrog.characteristics[Math.floor(Math.random() * 2)]]
-    ));
+    if (newFrogPlace) {
+      this.lake.setField(new Frog(
+        newFrogPlace.x,
+        newFrogPlace.y,
+        Object.values(Genders)[Math.floor(Math.random() * 2)],
+        [firstFrog.characteristics[Math.floor(Math.random() * 2)], secondFrog.characteristics[Math.floor(Math.random() * 2)]]
+      ));
+    }
 
     this.unselect();
   }

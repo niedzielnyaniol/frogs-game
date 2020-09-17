@@ -5,14 +5,8 @@ import Genders from './Genders';
 import Field from './Field';
 import Lake from './Lake';
 
-const states = {
-  NONE: 'GAME_STATE/NONE',
-  SELECTED: 'GAME_STATE/SELECTED',
-};
-
 class GameEngine {
   constructor(updateLake) {
-    this.state = states.NONE;
     this.lake = null;
     this.updateLake = () => updateLake(this.lake.fields);
     this.selected = null;

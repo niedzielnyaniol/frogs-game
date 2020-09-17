@@ -2,7 +2,7 @@ import Field from './Field';
 import FieldTypes from './FieldTypes';
 
 class Lake {
-  constructor(x = 10, y = 6) {
+  constructor(x, y) {
     this.fields = new Array(y);
 
     for (let i = 0; i < y; i += 1) {

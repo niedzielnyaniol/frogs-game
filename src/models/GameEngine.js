@@ -10,7 +10,6 @@ const states = {
   SELECTED: 'GAME_STATE/SELECTED',
 };
 
-
 class GameEngine {
   constructor(updateLake) {
     this.state = states.NONE;
@@ -30,8 +29,8 @@ class GameEngine {
     }
   }
 
-  startGame(x, y) {
-    this.lake = new Lake(30, 10);
+  startGame(x = 10, y = 6) {
+    this.lake = new Lake(x, y);
     
     const firstFrogPosition = this.getRandomPosition();
     let secondFrogPositon = this.getRandomPosition();

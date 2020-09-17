@@ -31,7 +31,7 @@ class GameEngine {
   }
 
   startGame(x, y) {
-    this.lake = new Lake(x, y);
+    this.lake = new Lake(30, 10);
     
     const firstFrogPosition = this.getRandomPosition();
     let secondFrogPositon = this.getRandomPosition();
@@ -48,20 +48,12 @@ class GameEngine {
   getAvailableMoves(x, y, move){
     const availableMoves = [];
 
-    if (this.isFieldInTheLake(x + move, y + move)) {
-      availableMoves.push(this.lake.getField(x + move, y + move));
-    }
-
-    if (this.isFieldInTheLake(x + move, y - move)) {
-      availableMoves.push(this.lake.getField(x + move, y - move));
-    }
-    
-    if (this.isFieldInTheLake(x - move, y + move)) {
-      availableMoves.push(this.lake.getField(x - move, y + move));
-    }
-    
-    if (this.isFieldInTheLake(x - move, y - move)) {
-      availableMoves.push(this.lake.getField(x - move, y - move));
+    for (let i = x - move; i <= x + move; i += move) {
+      for (let j = y - move; j <= y + move; j += move) {
+        if (this.isFieldInTheLake(i, j)) {
+          availableMoves.push(this.lake.getField(i, j));
+        }
+      }
     }
 
     return availableMoves;

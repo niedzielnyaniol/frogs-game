@@ -5,15 +5,8 @@ import Genders from './Genders';
 import Field from './Field';
 import Lake from './Lake';
 
-const states = {
-  NONE: 'GAME_STATE/NONE',
-  SELECTED: 'GAME_STATE/SELECTED',
-};
-
-
 class GameEngine {
   constructor(updateLake) {
-    this.state = states.NONE;
     this.lake = null;
     this.updateLake = () => updateLake(this.lake.fields);
     this.selected = null;
@@ -30,7 +23,7 @@ class GameEngine {
     }
   }
 
-  startGame(x, y) {
+  startGame(x = 10, y = 6) {
     this.lake = new Lake(x, y);
     
     const firstFrogPosition = this.getRandomPosition();
@@ -48,20 +41,12 @@ class GameEngine {
   getAvailableMoves(x, y, move){
     const availableMoves = [];
 
-    if (this.isFieldInTheLake(x + move, y + move)) {
-      availableMoves.push(this.lake.getField(x + move, y + move));
-    }
-
-    if (this.isFieldInTheLake(x + move, y - move)) {
-      availableMoves.push(this.lake.getField(x + move, y - move));
-    }
-    
-    if (this.isFieldInTheLake(x - move, y + move)) {
-      availableMoves.push(this.lake.getField(x - move, y + move));
-    }
-    
-    if (this.isFieldInTheLake(x - move, y - move)) {
-      availableMoves.push(this.lake.getField(x - move, y - move));
+    for (let i = x - move; i <= x + move; i += move) {
+      for (let j = y - move; j <= y + move; j += move) {
+        if (this.isFieldInTheLake(i, j)) {
+          availableMoves.push(this.lake.getField(i, j));
+        }
+      }
     }
 
     return availableMoves;

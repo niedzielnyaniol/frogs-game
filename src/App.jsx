@@ -13,7 +13,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    this.gameEngine.startGame();
+    this.gameEngine.startGame(30, 10);
   }
 
   handleFieldSelect = (x, y) => {

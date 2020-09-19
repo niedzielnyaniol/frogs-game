@@ -1,18 +1,40 @@
 module.exports = {
-  extends: 'airbnb',
+  extends: [
+    'airbnb',
+    'airbnb/hooks',
+    'plugin:@typescript-eslint/eslint-recommended',
+    'plugin:@typescript-eslint/recommended',
+    'plugin:import/errors',
+    'plugin:import/warnings',
+    'plugin:import/typescript',
+  ],
   env: {
     browser: true,
     jest: true,
   },
-  parserOptions: {
-    ecmaFeatures: {
-      jsx: true,
-    },
-    ecmaVersion: 2018,
-    sourceType: 'module',
-  },
+  parser: '@typescript-eslint/parser',
+  plugins: ['@typescript-eslint'],
   rules: {
+    '@typescript-eslint/no-shadow': ['error', { ignoreTypeValueShadow: true }],
+    '@typescript-eslint/no-useless-constructor': ['error'],
+    'jsx-a11y/control-has-associated-label': 0,
     'jsx-a11y/label-has-associated-control': 0,
+    'lines-between-class-members': ['error', 'always', { exceptAfterSingleLine: true }],
+    'no-shadow': 0,
+    'no-useless-constructor': 0,
+    'react/jsx-filename-extension': [1, { extensions: ['.tsx'] }],
+    'react/jsx-one-expression-per-line': 0,
     'react/jsx-props-no-spreading': 0,
+    'react/prop-types': 0,
+    'import/extensions': [
+      'error',
+      'ignorePackages',
+      {
+        js: 'never',
+        jsx: 'never',
+        ts: 'never',
+        tsx: 'never',
+      },
+    ],
   },
 };

@@ -211,7 +211,7 @@ class GameEngine {
       this.selectFrog(this.selected);
     }
 
-    this.updateLake();
+    return this.updateLake();
   }
 
   unselect(): void {

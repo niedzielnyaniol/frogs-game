@@ -21,6 +21,26 @@ class Lake {
     return this.fields;
   }
 
+  get frogsNumber(): number {
+    if (!this.fields.length) {
+      return 0;
+    }
+
+    let count = 0;
+    const y = this.fields.length;
+    const x = this.fields[0].length;
+
+    for (let i = 0; i < y; i += 1) {
+      for (let j = 0; j < x; j += 1) {
+        if (this.fields[i][j] instanceof Frog) {
+          count += 1;
+        }
+      }
+    }
+
+    return count;
+  }
+
   addFrog(frog: Frog): void {
     const { x, y } = frog.getOrigin();
 

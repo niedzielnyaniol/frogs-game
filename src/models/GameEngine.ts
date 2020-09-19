@@ -78,10 +78,22 @@ class GameEngine {
     this.lake.moveField(selected, nextMove);
   }
 
+  private checkIfWin():void {
+    if (this.getFrogsCount() === this.getLakeSize()) {
+      // eslint-disable-next-line no-alert
+      if (window.confirm('🎉 You won, wanna play again? 🎉')) {
+        const { x, y } = this.lake.getBoundaries();
+
+        this.unselect();
+        this.startGame(x, y);
+      }
+    }
+  }
+
   private reproduce(firstFrog: Frog, secondFrog: Frog): void {
     if (firstFrog.getGender() === secondFrog.getGender()) {
       // eslint-disable-next-line no-alert
-      return alert('Frogs must have different genters to reproduce!');
+      return alert('♂️ Frogs must have different genders to reproduce! ♀️');
     }
 
     const mother = firstFrog.getGender() === Genders.FEMALE ? firstFrog : secondFrog;
@@ -102,7 +114,12 @@ class GameEngine {
       );
 
       this.lake.addFrog(newFrog);
+    } else {
+      // eslint-disable-next-line no-alert
+      alert('🌎 No space near mother left! 🌎');
     }
+
+    this.checkIfWin();
 
     return undefined;
   }
@@ -131,6 +148,16 @@ class GameEngine {
     }
 
     return place;
+  }
+
+  getFrogsCount(): number {
+    return this.lake.frogsNumber;
+  }
+
+  getLakeSize(): number {
+    const { x, y } = this.lake.getBoundaries();
+
+    return x * y;
   }
 
   getSelected(): Frog | null {

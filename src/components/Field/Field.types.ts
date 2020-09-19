@@ -5,7 +5,7 @@ type Props = {
   x: number,
   y: number,
   gender: Genders | false,
-  onFieldSelect: (x: number, y: number) => void,
+  onClick: (x: number, y: number) => void,
   characteristics: Characteristics | false,
   isSelected: boolean,
   isAvailable: boolean,

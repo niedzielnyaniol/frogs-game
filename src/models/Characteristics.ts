@@ -1,20 +1,20 @@
 import Randomizer from './Randomizer';
 
-enum HeightCharacteristics {
+export enum HeightCharacteristics {
   TALL = 'CHARACTERISTIC/TALL',
   SHORT = 'CHARACTERISTIC/SHORT',
 }
 
-enum WeightCharacteristics {
+export enum WeightCharacteristics {
   FAT = 'CHARACTERISTIC/FAT',
   SLIM = 'CHARACTERISTIC/SLIM',
 }
 
 const dictionary = {
   [HeightCharacteristics.TALL]: 'tall',
-  [HeightCharacteristics.SHORT]: 'tall',
-  [WeightCharacteristics.FAT]: 'tall',
-  [WeightCharacteristics.SLIM]: 'tall',
+  [HeightCharacteristics.SHORT]: 'short',
+  [WeightCharacteristics.FAT]: 'fat',
+  [WeightCharacteristics.SLIM]: 'slim',
 };
 
 class Characteristics {
@@ -29,14 +29,18 @@ class Characteristics {
       this.weightCharacteristic = weightCharacteristic;
     } else {
       this.weightCharacteristic = Object
-        .values(WeightCharacteristics)[Randomizer.getRandomNumber({ to: 1 })];
+        .values(WeightCharacteristics)[Randomizer.getRandomNumber({
+          to: Object.keys(WeightCharacteristics).length,
+        })];
     }
 
     if (heightCharacteristic) {
       this.heightCharacteristic = heightCharacteristic;
     } else {
       this.heightCharacteristic = Object
-        .values(HeightCharacteristics)[Randomizer.getRandomNumber({ to: 1 })];
+        .values(HeightCharacteristics)[Randomizer.getRandomNumber({
+          to: Object.keys(WeightCharacteristics).length,
+        })];
     }
   }
 

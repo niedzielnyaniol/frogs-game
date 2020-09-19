@@ -5,7 +5,9 @@ import Frog from '../../models/Frog';
 
 const Lake = ({
   fields,
-  onFieldSelect,
+  selectedFrog,
+  availableMoves,
+  onFieldClick,
 }: Props):JSX.Element => (
   <table id="lake">
     {
@@ -23,9 +25,9 @@ const Lake = ({
                       characteristics={
                         field instanceof Frog && field.getCharacteristics()
                       }
-                      isSelected={false}
-                      isAvailable={false}
-                      onFieldSelect={onFieldSelect}
+                      isSelected={!!selectedFrog && origin.isEqual(selectedFrog.getOrigin())}
+                      isAvailable={availableMoves.includes(origin)}
+                      onClick={onFieldClick}
                     />
                   );
                 })

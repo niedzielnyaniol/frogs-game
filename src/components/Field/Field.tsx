@@ -8,7 +8,7 @@ const Field = ({
   x,
   y,
   gender,
-  onFieldSelect,
+  onClick,
   characteristics,
   isSelected,
   isAvailable,
@@ -35,7 +35,7 @@ const Field = ({
           </>
         )
       }
-      <input checked={isSelected} type="checkbox" onChange={() => onFieldSelect(x, y)} />
+      <input checked={isSelected} type="checkbox" onChange={() => onClick(x, y)} />
     </label>
   </td>
 );

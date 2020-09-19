@@ -5,6 +5,7 @@ import LakeComponent from '../components/Lake';
 import GameEngine from '../models/GameEngine';
 import Field from '../models/Field';
 
+// eslint-disable-next-line @typescript-eslint/ban-types
 class App extends React.Component<object, State> {
   private gameEngine: GameEngine;
 
@@ -17,33 +18,15 @@ class App extends React.Component<object, State> {
   }
 
   componentDidMount(): void {
-    this.gameEngine.startGame(30, 10);
+    this.gameEngine.startGame(10, 8);
   }
 
-  handleFieldSelect = (x: number, y: number):void => {
-    this.gameEngine.selectField(x, y);
+  handleFieldClick = (x: number, y: number):void => {
+    this.gameEngine.handleFieldClick(x, y);
   }
 
   updateLake = (lake: Field[][]): void => {
     this.setState({ lake });
-  }
-
-  handleJump = (): void => {
-    const selected = this.gameEngine.getSelected();
-    const nextMove = this.gameEngine.getNextMove();
-
-    if (selected && nextMove) {
-      this.gameEngine.moveFrog(selected, nextMove);
-    }
-  }
-
-  handleReproduce = (): void => {
-    const selected = this.gameEngine.getSelected();
-    const nextMove = this.gameEngine.getNextMove();
-
-    if (selected && nextMove) {
-      this.gameEngine.reproduce(selected, nextMove);
-    }
   }
 
   handleUnselect = (): void => {
@@ -55,7 +38,12 @@ class App extends React.Component<object, State> {
 
     return lake ? (
       <>
-        <LakeComponent fields={lake} onFieldSelect={this.handleFieldSelect} />
+        <LakeComponent
+          fields={lake}
+          onFieldClick={this.handleFieldClick}
+          selectedFrog={this.gameEngine.getSelected()}
+          availableMoves={this.gameEngine.getAvailableMoves()}
+        />
         <div className="legend">
           <h3>Legend</h3>
           <ul>
@@ -68,25 +56,6 @@ class App extends React.Component<object, State> {
               <strong>Frog female</strong>
             </li>
           </ul>
-          {
-            this.gameEngine.isNextMove && (
-              <>
-                <h3>Actions</h3>
-                {
-                  this.gameEngine.getCanReproduce() ? (
-                    <button type="button" id="reproduce" onClick={this.handleReproduce}>Reproduce</button>
-                  ) : (
-                    <button type="button" id="jump" onClick={this.handleJump}>Jump</button>
-                  )
-                }
-              </>
-            )
-          }
-          {
-            this.gameEngine.isSelected && (
-            <button type="button" id="reproduce" onClick={this.handleUnselect}>Unselect</button>
-            )
-          }
         </div>
       </>
     ) : 'Start The Game';

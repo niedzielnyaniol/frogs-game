@@ -56,6 +56,7 @@ class App extends React.Component<object, State> {
               <strong>Frog female</strong>
             </li>
           </ul>
+          Frogs counter: {this.gameEngine.getFrogsCount()} / {this.gameEngine.getLakeSize()} 🐸
         </div>
       </>
     ) : 'Start The Game';
